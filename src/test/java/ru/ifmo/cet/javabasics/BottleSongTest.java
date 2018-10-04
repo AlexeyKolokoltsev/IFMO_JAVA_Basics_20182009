@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Created by EE on 2018-09-20.
- */
+
+ //
 class BottleSongTest {
 
     @Test
@@ -678,6 +677,17 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
+     @Test
+     public void test60(){
+         final String bottleSongLyrics = new BottleSong(60).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take sixty down and pass around, 39 bottles of beer on the wall.\n" +
+                         "39 bottles of beer on the wall, 39 bottles of beer.\n" +
+                         "Take thirty nine down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
     @Test
     public void test8(){
         final String bottleSongLyrics = new BottleSong(8).getBottleSongLyrics();
@@ -767,31 +777,7 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
-    @Test
-    public void test11(){
-        final String bottleSongLyrics = new BottleSong(11).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take eleven down and pass around, 88 bottles of beer on the wall.\n" +
-                "88 bottles of beer on the wall, 88 bottles of beer.\n" +
-                "Take eleven down and pass around, 77 bottles of beer on the wall.\n" +
-                "77 bottles of beer on the wall, 77 bottles of beer.\n" +
-                "Take eleven down and pass around, 66 bottles of beer on the wall.\n" +
-                "66 bottles of beer on the wall, 66 bottles of beer.\n" +
-                "Take eleven down and pass around, 55 bottles of beer on the wall.\n" +
-                "55 bottles of beer on the wall, 55 bottles of beer.\n" +
-                "Take eleven down and pass around, 44 bottles of beer on the wall.\n" +
-                "44 bottles of beer on the wall, 44 bottles of beer.\n" +
-                "Take eleven down and pass around, 33 bottles of beer on the wall.\n" +
-                "33 bottles of beer on the wall, 33 bottles of beer.\n" +
-                "Take eleven down and pass around, 22 bottles of beer on the wall.\n" +
-                "22 bottles of beer on the wall, 22 bottles of beer.\n" +
-                "Take eleven down and pass around, 11 bottles of beer on the wall.\n" +
-                "11 bottles of beer on the wall, 11 bottles of beer.\n" +
-                "Take eleven down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
+
     @Test
     public void test12(){
         final String bottleSongLyrics = new BottleSong(12).getBottleSongLyrics();
@@ -892,17 +878,32 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
-    @Test
-    public void test60(){
-        final String bottleSongLyrics = new BottleSong(60).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take sixty down and pass around, 39 bottles of beer on the wall.\n" +
-                "39 bottles of beer on the wall, 39 bottles of beer.\n" +
-                "Take thirty nine down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
+     @Test
+     public void test11(){
+         final String bottleSongLyrics = new BottleSong(11).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take eleven down and pass around, 88 bottles of beer on the wall.\n" +
+                         "88 bottles of beer on the wall, 88 bottles of beer.\n" +
+                         "Take eleven down and pass around, 77 bottles of beer on the wall.\n" +
+                         "77 bottles of beer on the wall, 77 bottles of beer.\n" +
+                         "Take eleven down and pass around, 66 bottles of beer on the wall.\n" +
+                         "66 bottles of beer on the wall, 66 bottles of beer.\n" +
+                         "Take eleven down and pass around, 55 bottles of beer on the wall.\n" +
+                         "55 bottles of beer on the wall, 55 bottles of beer.\n" +
+                         "Take eleven down and pass around, 44 bottles of beer on the wall.\n" +
+                         "44 bottles of beer on the wall, 44 bottles of beer.\n" +
+                         "Take eleven down and pass around, 33 bottles of beer on the wall.\n" +
+                         "33 bottles of beer on the wall, 33 bottles of beer.\n" +
+                         "Take eleven down and pass around, 22 bottles of beer on the wall.\n" +
+                         "22 bottles of beer on the wall, 22 bottles of beer.\n" +
+                         "Take eleven down and pass around, 11 bottles of beer on the wall.\n" +
+                         "11 bottles of beer on the wall, 11 bottles of beer.\n" +
+                         "Take eleven down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
+
     @Test
     public void test70(){
         final String bottleSongLyrics = new BottleSong(70).getBottleSongLyrics();
@@ -925,34 +926,9 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
-    @Test
-    public void test90(){
-        final String bottleSongLyrics = new BottleSong(90).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take ninety down and pass around, 9 bottles of beer on the wall.\n" +
-                "9 bottles of beer on the wall, 9 bottles of beer.\n" +
-                "Take nine down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
-    @Test
-    public void test24(){
-        final String bottleSongLyrics = new BottleSong(24).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take twenty four down and pass around, 75 bottles of beer on the wall.\n" +
-                "75 bottles of beer on the wall, 75 bottles of beer.\n" +
-                "Take twenty four down and pass around, 51 bottles of beer on the wall.\n" +
-                "51 bottles of beer on the wall, 51 bottles of beer.\n" +
-                "Take twenty four down and pass around, 27 bottles of beer on the wall.\n" +
-                "27 bottles of beer on the wall, 27 bottles of beer.\n" +
-                "Take twenty four down and pass around, 3 bottles of beer on the wall.\n" +
-                "3 bottles of beer on the wall, 3 bottles of beer.\n" +
-                "Take three down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
+
+
+
     @Test
     public void test55(){
         final String bottleSongLyrics = new BottleSong(55).getBottleSongLyrics();
@@ -964,6 +940,17 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
+     @Test
+     public void test78(){
+         final String bottleSongLyrics = new BottleSong(78).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take seventy eight down and pass around, 21 bottles of beer on the wall.\n" +
+                         "21 bottles of beer on the wall, 21 bottles of beer.\n" +
+                         "Take twenty one down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
     @Test
     public void tes99(){
         final String bottleSongLyrics = new BottleSong(99).getBottleSongLyrics();
@@ -984,17 +971,52 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
-    @Test
-    public void test78(){
-        final String bottleSongLyrics = new BottleSong(78).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take seventy eight down and pass around, 21 bottles of beer on the wall.\n" +
-                "21 bottles of beer on the wall, 21 bottles of beer.\n" +
-                "Take twenty one down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
+     @Test
+     public void test24(){
+         final String bottleSongLyrics = new BottleSong(24).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take twenty four down and pass around, 75 bottles of beer on the wall.\n" +
+                         "75 bottles of beer on the wall, 75 bottles of beer.\n" +
+                         "Take twenty four down and pass around, 51 bottles of beer on the wall.\n" +
+                         "51 bottles of beer on the wall, 51 bottles of beer.\n" +
+                         "Take twenty four down and pass around, 27 bottles of beer on the wall.\n" +
+                         "27 bottles of beer on the wall, 27 bottles of beer.\n" +
+                         "Take twenty four down and pass around, 3 bottles of beer on the wall.\n" +
+                         "3 bottles of beer on the wall, 3 bottles of beer.\n" +
+                         "Take three down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
+
+     @Test
+     public void test21(){
+         final String bottleSongLyrics = new BottleSong(21).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take twenty one down and pass around, 78 bottles of beer on the wall.\n" +
+                         "78 bottles of beer on the wall, 78 bottles of beer.\n" +
+                         "Take twenty one down and pass around, 57 bottles of beer on the wall.\n" +
+                         "57 bottles of beer on the wall, 57 bottles of beer.\n" +
+                         "Take twenty one down and pass around, 36 bottles of beer on the wall.\n" +
+                         "36 bottles of beer on the wall, 36 bottles of beer.\n" +
+                         "Take twenty one down and pass around, 15 bottles of beer on the wall.\n" +
+                         "15 bottles of beer on the wall, 15 bottles of beer.\n" +
+                         "Take fifteen down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
+     @Test
+     public void test90(){
+         final String bottleSongLyrics = new BottleSong(90).getBottleSongLyrics();
+         assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
+                         "Take ninety down and pass around, 9 bottles of beer on the wall.\n" +
+                         "9 bottles of beer on the wall, 9 bottles of beer.\n" +
+                         "Take nine down and pass around, no more bottles of beer on the wall.\n" +
+                         "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                         "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
+                 bottleSongLyrics);
+     }
     @Test
     public void test86(){
         final String bottleSongLyrics = new BottleSong(86).getBottleSongLyrics();
@@ -1006,41 +1028,27 @@ class BottleSongTest {
                 "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
             bottleSongLyrics);
     }
-    @Test
-    public void test21(){
-        final String bottleSongLyrics = new BottleSong(21).getBottleSongLyrics();
-        assertEquals("99 bottles of beer on the wall, 99 bottles of beer.\n" +
-                "Take twenty one down and pass around, 78 bottles of beer on the wall.\n" +
-                "78 bottles of beer on the wall, 78 bottles of beer.\n" +
-                "Take twenty one down and pass around, 57 bottles of beer on the wall.\n" +
-                "57 bottles of beer on the wall, 57 bottles of beer.\n" +
-                "Take twenty one down and pass around, 36 bottles of beer on the wall.\n" +
-                "36 bottles of beer on the wall, 36 bottles of beer.\n" +
-                "Take twenty one down and pass around, 15 bottles of beer on the wall.\n" +
-                "15 bottles of beer on the wall, 15 bottles of beer.\n" +
-                "Take fifteen down and pass around, no more bottles of beer on the wall.\n" +
-                "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                "Go to the store and buy some more, 99 bottles of beer on the wall.\n",
-            bottleSongLyrics);
-    }
-    @Test
-    public void testMinus1(){
-        assertThrows(IllegalArgumentException.class, () -> new BottleSong(-1).getBottleSongLyrics());
-    }
+
+     @Test
+     public void testMinus79(){
+         assertThrows(IllegalArgumentException.class, () -> new BottleSong(-79).getBottleSongLyrics());
+     }
+     @Test
+     public void test672(){
+         assertThrows(IllegalArgumentException.class, () -> new BottleSong(672).getBottleSongLyrics());
+     }
+
     @Test
     public void test100(){
         assertThrows(IllegalArgumentException.class, () -> new BottleSong(100).getBottleSongLyrics());
     }
-    @Test
-    public void test672(){
-        assertThrows(IllegalArgumentException.class, () -> new BottleSong(672).getBottleSongLyrics());
-    }
+
     @Test
     public void test0(){
         assertThrows(IllegalArgumentException.class, () -> new BottleSong(0).getBottleSongLyrics());
     }
-    @Test
-    public void testMinus79(){
-        assertThrows(IllegalArgumentException.class, () -> new BottleSong(-79).getBottleSongLyrics());
-    }
+     @Test
+     public void testMinus1(){
+         assertThrows(IllegalArgumentException.class, () -> new BottleSong(-1).getBottleSongLyrics());
+     }
 }
