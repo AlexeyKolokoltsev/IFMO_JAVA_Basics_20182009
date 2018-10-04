@@ -1,21 +1,152 @@
 package ru.ifmo.cet.javabasics;
-
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.*;
+import java.io.IOException;
 
+import static java.nio.file.Files.readAllLines;
 
 public class WarAndPeaceExercise {
-
-    public static String warAndPeace() {
-        final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
+    public static Map<String, Integer> words = new HashMap<>();
+    public static String warAndPeace() throws IOException {
         final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
 
-        // TODO map lowercased words to its amount in text and concatenate its entries.
-        // TODO If word "котик" occurred in text 23 times then its entry would be "котик - 23\n".
-        // TODO Entries in final String should be also sorted by amount and then in alphabetical order if needed.
-        // TODO Also omit any word with lengths less than 4 and frequency less than 10
+        final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
 
-        throw new UnsupportedOperationException();
+
+
+        find(tome34Path);
+        find(tome12Path);
+
+        List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
+
+        Collections.sort(sortMap, new Comparator<Map.Entry<String,Integer>>() {
+
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                if(o1.getValue().equals(o2.getValue()))
+                    return o1.getKey().compareTo(o2.getKey());
+                else
+                    return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+
+        String result = "";
+        for(Map.Entry entry: sortMap){
+            String key = (String) entry.getKey();
+            Integer value = (Integer) entry.getValue();
+            if (value >= 10) {
+                result += key + " - " + value + "\n";
+            }
+        }
+        return result.trim();
+    }
+
+    private static void find(Path path) throws IOException {
+        for (String line : readAllLines(path, Charset.forName("windows-1251"))) {
+            line = line.replaceAll("[^а-яА-Яa-zA-Z]", " ");
+            for (String word : line.split(" ")) {
+                if (word.length() > 3) {
+                    word = word.toLowerCase();
+                    if (words.containsKey(word)) {
+                        words.put(word, words.get(word) + 1);
+                    } else {
+                        words.put(word, 1);
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+___________00_____________________7_______________
+________0000_____________________777______________
+______0000______________________77777_____________
+____00000______________________7777777____________
+___00000______________________777777777___________
+__000000____________77777777777777777777777777777
+_0000000______________7777777777777777777777777___
+_0000000_______________7777777777777777777777_____
+_0000__00_________________77777777777777777_______
+_0000__00000000__________777777777_777777777______
+_000000000000___________7777777_______7777777_____
+__0000000000___________77777_____________77777____
+___0000_000000________777___________________777___
+____00000_______0___________0000__________________
+______000000__00000______000000___________________
+________000000000000000000000_____________________
+__________00000000000000000_______________________
+______________000000000___________________________
+
+
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_______________¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶_______________________¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶_____________________________¶¶¶¶
+¶¶¶¶¶¶¶_________________________________¶¶
+¶¶¶¶¶_____________________________________
+¶¶¶¶____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶___________
+¶¶¶_________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶________
+¶¶_______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_____
+¶_______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____
+¶______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶___
+¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
+¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
+¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
+¶¶¶___¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
+¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
+¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶
+¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶
+¶¶¶¶¶¶¶¶_¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶________________________¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶__________________¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶______¶¶______¶¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+ */
