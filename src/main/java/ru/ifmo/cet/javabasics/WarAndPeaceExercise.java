@@ -1,21 +1,154 @@
 package ru.ifmo.cet.javabasics;
-
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.*;
+import java.io.IOException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WarAndPeaceExercise {
+    private static Map<String, Integer> words = new HashMap<>();
 
-    public static String warAndPeace() {
-        final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
+    public static String warAndPeace() throws IOException {
+
         final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
+        final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
 
-        // TODO map lowercased words to its amount in text and concatenate its entries.
-        // TODO Iff word "котик" occurred in text 23 times then its entry would be "котик - 23\n".
-        // TODO Entries in final String should be also sorted by amount and then in alphabetical order iff needed.
-        // TODO Also omit any word with lengths less than 4 and frequency less than 10
+        find(tome34Path);
+        find(tome12Path);
 
-        throw new UnsupportedOperationException();
+
+        List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
+
+        sortMap.sort((o1, o2) ->
+                (o1.getValue().equals(o2.getValue())) ? (o1.getKey().compareTo(o2.getKey())) : (o2.getValue().compareTo(o1.getValue())));
+
+        return sortMap.stream().filter(len -> len.getValue() >= 10).map(get -> get.getKey() + " - " + get.getValue()).collect(Collectors.joining("\n"));
     }
 
+    private static void find(Path path) throws IOException {
+        String string;
+        string = Files.readAllLines(path, Charset.forName("windows-1251")).toString();
+        string = string.toLowerCase();
+        string = string.replaceAll("[^а-яА-Яa-zA-Z]",",");
+        Stream<String > streamWords = Stream.of(string.split(","));
+        streamWords.filter(os -> os.length() > 3).forEach((String os) -> {
+            int value = words.getOrDefault(os,0) + 1;
+            words.put(os,value);
+        });
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+```````````````````````````````````````````````````````````````````
+```````````````````ggggg``````````````````gggggg```````````````````
+`````````````````gggggggggggg`````````ggggggggggg``````````````````
+````````````````ggg````````gggg`````ggg````````ggg`````````````````
+```````````````ggg````````````ggg`ggg```````````ggg````````````````
+```````````````gg```````````````ggg``````````````gg````````````````
+``````````````gg`````````````````````````````````gg````````````````
+``````````````gg```````````````ggggg``````````````gg```````````````
+``````````````g`````````gggggggggggggggggg````````gg```````````````
+``````````````g``````ggggg``````````````ggggg`````gg```````````````
+```````gggggggg````gggg`````````````````````ggg```ggggggggggg``````
+```ggggg`````````ggg``````````````````````````ggg`````````gggggg```
+`gggg```````````ggg`````````````````````````````ggg```````````gggg`
+ggg````````````gg````````````````````````````````ggg````````````gg`
+ggg```````````gg``````````````````````````````````ggg```````````gg`
+`gg``````````gg````````````````````````````````````ggg`````````ggg`
+`ggg````````gg``````````````````````````````````````gg`````````gg``
+``gg````````gg```````````````````````````````````````gg```````ggg``
+```gg``````gg```````````ggg```````````gggg```````````gg``````ggg```
+````ggg````gg``````````ggggg``````````gggg```````````gg``````gg````
+``````gg``ggg``````````gggg```````````gggg````````````gg```ggg`````
+``````gg``ggg````````````g`````````````gg`````````````gg``ggg``````
+`````gg```ggg`````````````````````````````````````````gg````gg`````
+```gg``````gg````````````````````````````````````````gg``````ggg```
+```gg``````gg````````````g`````````````g`````````````gg```````ggg``
+``gg```````gg`````````````g```````````g``````````````gg````````gg``
+`gg`````````gg`````````````ggg`````ggg``````````````gg``````````gg`
+`gg``````````gg``````````````ggggggg```````````````ggg``````````ggg
+`gg``````````ggg```````````````````````````````````gg```````````ggg
+``ggg`````````ggg`````````````````````````````````gg``````````gggg`
+```gggg````````ggg``````````````````````````````ggg```````gggggg```
+``````gggg```````ggg```````````````````````````ggg``gggggggg```````
+``````````ggggg```gggg```````````````````````ggg````g``````````````
+``````````````g`````gggg``````````````````gggg`````gg``````````````
+``````````````gg```````gggggg````````gggggg````````gg``````````````
+``````````````gg```````````gggggggggggg```````````gg```````````````
+``````````````gg``````````````````````````````````gg```````````````
+```````````````gg``````````````gggg``````````````gg````````````````
+```````````````ggg```````````gg````gg```````````gg`````````````````
+````````````````ggg``````gggg````````ggggg`````gg``````````````````
+````````````````gggggggggg``````````````ggggggggg``````````````````
+
+__________¶¶¶______________________________¶¶¶___
+___________$¶¶¶¶__________________________¶¶$$¶___
+___________¶¶__¶¶______________________¶¶¶¶¶¶_____
+____________¶¶__¶$¶__________________¶¶¶¶_¶¶______
+_____________¶¶__¶¶¶________________¶¶¶_¶$¶_______
+_________¶¶__¶$___¶¶¶_______¶¶____¶¶¶___$¶________
+_________¶¶¶__¶¶___¶$¶_____¶¶¶¶__¶$¶__¶$¶_________
+__________$¶¶__¶¶___¶$____¶¶_¶¶_¶$¶__¶¶¶__________
+__________$¶¶¶__¶$¶¶¶¶¶¶¶¶¶¶¶$¶¶¶___¶¶¶___________
+__________¶$¶¶¶¶¶¶¶__________¶¶¶¶¶_¶¶__¶¶¶¶¶¶$¶___
+¶¶¶¶¶¶¶____¶¶$¶¶_¶$¶$¶¶___¶¶¶$¶¶¶¶¶$¶¶¶¶¶__¶$¶____
+¶¶¶¶¶¶¶¶¶¶¶¶¶¶_¶$¶¶¶¶¶¶__¶$¶¶$¶¶___¶¶_____¶¶¶_____
+___¶¶¶¶¶¶___$¶__¶$¶¶¶$¶___¶¶¶¶¶¶____¶¶¶¶¶¶¶¶______
+_______¶¶¶¶¶$_________________________¶_¶¶¶_______
+___________¶$________¶¶¶¶¶¶___________¶¶¶¶________
+_____¶¶¶¶¶¶¶$__¶¶____$¶¶¶¶$___________¶¶__________
+__¶¶¶¶¶_____$__¶¶______¶¶¶___________¶$___________
+¶¶¶¶¶¶¶¶¶¶¶¶$¶¶¶¶¶_____________¶¶___¶$¶¶__________
+___________¶$¶¶¶_¶¶¶¶________¶¶¶____¶$¶¶¶¶________
+_________¶$¶_$_____¶¶¶¶¶¶¶¶¶¶¶_____¶$¶___¶¶¶______
+_________$¶_¶¶¶¶_________________¶¶¶¶¶¶¶¶¶¶¶¶_____
+________¶¶¶¶¶_¶¶¶¶¶¶________¶¶¶¶¶$_________¶¶¶____
+_______¶$¶¶____¶$¶¶¶¶¶$¶¶¶¶¶¶¶¶__$________________
+______________¶$¶¶¶¶¶_¶¶__¶¶_¶¶¶¶¶________________
+_____________¶¶¶¶¶____¶¶__¶¶__¶¶¶¶________________
+_____________¶________¶¶_¶¶_____¶¶________________
+______________________¶¶_¶¶_______________________
+_______________________¶¶$________________________
+_______________________¶$¶________________________
+_______________________¶¶_________________________
+ */
