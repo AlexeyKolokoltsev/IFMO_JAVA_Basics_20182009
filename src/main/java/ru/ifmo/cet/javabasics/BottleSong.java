@@ -1,7 +1,5 @@
 package ru.ifmo.cet.javabasics;
-
 import java.util.*;
-
 public class BottleSong {
 
     static final int TOTAL_BOTTLES = 99;
