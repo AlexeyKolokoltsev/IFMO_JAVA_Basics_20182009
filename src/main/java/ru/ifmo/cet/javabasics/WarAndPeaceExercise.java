@@ -8,145 +8,74 @@ import java.io.IOException;
 import static java.nio.file.Files.readAllLines;
 
 public class WarAndPeaceExercise {
-    public static Map<String, Integer> words = new HashMap<>();
     public static String warAndPeace() throws IOException {
-        final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
+        Map<String, Integer> words = new HashMap<>(); // Сюда закачаются все тома
 
-        final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
+        find(Paths.get("src", "main", "resources", "WAP12.txt"), words); // Закачали 1, 2 том
+        find(Paths.get("src", "main", "resources", "WAP34.txt"), words); // Закачали 3, 4 том
 
+        // Чтобы отсортировать как нам надо, преобразуем карту в список
+        List<Map.Entry<String,Integer>> toList = new ArrayList<>(words.entrySet());
 
-
-        find(tome34Path);
-        find(tome12Path);
-
-        List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
-
-        Collections.sort(sortMap, new Comparator<Map.Entry<String,Integer>>() {
-
+        // Сортируем
+        toList.sort(new Comparator<Map.Entry<String,Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                // Если встречаемость слов совпадает, то сортируем по тексту слова
                 if(o1.getValue().equals(o2.getValue()))
                     return o1.getKey().compareTo(o2.getKey());
-                else
+                else // иначе сортируем по встречаемости
                     return o2.getValue().compareTo(o1.getValue());
             }
         });
 
-        String result = "";
-        for(Map.Entry entry: sortMap){
-            String key = (String) entry.getKey();
-            Integer value = (Integer) entry.getValue();
-            if (value >= 10) {
-                result += key + " - " + value + "\n";
-            }
+        // Сюда мы запишем результаты
+        List<String> lines = new ArrayList<>();
+
+        // Обходим все слова
+        for (int i = 0; i < toList.size(); i++) {
+            if (toList.get(i).getValue() >= 10) // Если слово встречается более 10 раз
+                // Добавляем его в результат
+                lines.add(String.format("%s - %d", toList.get(i).getKey(), toList.get(i).getValue()));
         }
-        return result.trim();
+
+        // Преобразуем результаты в одну строку
+       return String.join("\n", lines);
     }
 
-    private static void find(Path path) throws IOException {
+    private static void find(Path path, Map<String, Integer> wordMap) throws IOException {
+
         for (String line : readAllLines(path, Charset.forName("windows-1251"))) {
-            line = line.replaceAll("[^а-яА-Яa-zA-Z]", " ");
-            for (String word : line.split(" ")) {
-                if (word.length() > 3) {
-                    word = word.toLowerCase();
-                    if (words.containsKey(word)) {
-                        words.put(word, words.get(word) + 1);
-                    } else {
-                        words.put(word, 1);
-                    }
+            // Строки в Java неизменяемы, поэтому чтобы поменять строку,
+            // нужно преобразовать её в массив символов
+            char[] arr = line.toCharArray();
 
-                }
-
+            // Чтобы оставить только слова, надо все знаки препинания и цифры
+            // заменить на пробельные символы
+            for (int i = 0; i < arr.length; i++) {
+                if (!Character.isLetter(arr[i]))
+                    arr[i] = ' ';
             }
 
+            // Обработанный массив преобразовываем обратно к строке
+            line = new String(arr);
+
+            for (String word : line.split(" ")) {
+                // Сразу отбрасываем слова короче 4 символов
+                if (word.length() < 4)
+                    continue;
+
+                // Переводим слово в нижний регистр
+                word = word.toLowerCase();
+
+                // Записываем счётчики, сколько какого слова
+                if (wordMap.containsKey(word)) {
+                    wordMap.put(word, wordMap.get(word) + 1);
+                }
+                else {
+                    wordMap.put(word, 1);
+                }
+            }
         }
-
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-___________00_____________________7_______________
-________0000_____________________777______________
-______0000______________________77777_____________
-____00000______________________7777777____________
-___00000______________________777777777___________
-__000000____________77777777777777777777777777777
-_0000000______________7777777777777777777777777___
-_0000000_______________7777777777777777777777_____
-_0000__00_________________77777777777777777_______
-_0000__00000000__________777777777_777777777______
-_000000000000___________7777777_______7777777_____
-__0000000000___________77777_____________77777____
-___0000_000000________777___________________777___
-____00000_______0___________0000__________________
-______000000__00000______000000___________________
-________000000000000000000000_____________________
-__________00000000000000000_______________________
-______________000000000___________________________
-
-
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_______________¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶_______________________¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶_____________________________¶¶¶¶
-¶¶¶¶¶¶¶_________________________________¶¶
-¶¶¶¶¶_____________________________________
-¶¶¶¶____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶___________
-¶¶¶_________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶________
-¶¶_______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_____
-¶_______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____
-¶______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶___
-¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
-¶_____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
-¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
-¶¶¶___¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
-¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__
-¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶
-¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶
-¶¶¶¶¶¶¶¶_¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶________________________¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶__________________¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶______¶¶______¶¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶
-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
- */
