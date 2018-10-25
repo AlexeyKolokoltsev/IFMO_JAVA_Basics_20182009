@@ -2,7 +2,7 @@ package ru.ifmo.cet.javabasics;
 import java.util.*;
 public class BottleSong {
 
-    static final int TOTAL_BOTTLES = 99;
+    static final int total_bottles = 99;
     final private  static String[] UNITS = {"no more","one","two","three","four",
             "five","six","seven","eight","nine","ten",
             "eleven","twelve","thirteen","fourteen","fifteen",
@@ -14,7 +14,7 @@ public class BottleSong {
 
     public BottleSong(int bottleTakenAtOnce) {
         // При создании проверяем допустимость количества бутылок за раз
-        if (bottleTakenAtOnce < 1 || bottleTakenAtOnce > TOTAL_BOTTLES)
+        if (bottleTakenAtOnce < 1 || bottleTakenAtOnce > total_bottles)
             throw new IllegalArgumentException("One can take from ` to 99 bottles at once");
 
         m_taken_at_once = bottleTakenAtOnce;
@@ -22,13 +22,13 @@ public class BottleSong {
 
     public String getBottleSongLyrics(){
         List<String> lines = new ArrayList<>();
-        int left = TOTAL_BOTTLES; // Сколько бутылок осталось
+        int left = total_bottles; // Сколько бутылок осталось
 
         // Стихотворение всегда начинается с этой строки
         lines.add("99 bottles of beer on the wall, 99 bottles of beer.");
 
         // Снимаем бутылки, пока есть что снимать
-        for (int i = TOTAL_BOTTLES - m_taken_at_once; i > 0; i-= m_taken_at_once){
+        for (int i = total_bottles - m_taken_at_once; i > 0; i-= m_taken_at_once){
             lines.add(String.format("Take %s down and pass around, %d bottle%s of beer on the wall.",
                     getNumberName(m_taken_at_once), // Сколько бутылок сняли (прописью)
                     i, // Сколько осталось после этого
