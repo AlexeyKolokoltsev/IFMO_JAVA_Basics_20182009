@@ -2,7 +2,7 @@ package ru.ifmo.cet.javabasics;
 import java.util.*;
 public class BottleSong {
 
-    static final int total_bottles = 99;
+    static final private  int total_bottles = 99;
     final private  static String[] UNITS = {"no more","one","two","three","four",
             "five","six","seven","eight","nine","ten",
             "eleven","twelve","thirteen","fourteen","fifteen",
@@ -10,7 +10,7 @@ public class BottleSong {
     final private static String[] TENS = {"twenty","thirty","forty","fifty",
             "sixty","seventy","eighty","ninety"};
 
-    int m_taken_at_once; // Сколько берём бутылок за раз
+   private int m_taken_at_once; // Сколько берём бутылок за раз
 
     public BottleSong(int bottleTakenAtOnce) {
         // При создании проверяем допустимость количества бутылок за раз
