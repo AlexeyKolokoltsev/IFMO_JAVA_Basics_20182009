@@ -10,7 +10,7 @@ public class BottleSong {
     final private static String[] TENS = {"twenty","thirty","forty","fifty",
             "sixty","seventy","eighty","ninety"};
 
-   private int m_taken_at_once; // Сколько берём бутылок за раз
+   private int m_taken_at_once; // Сколько берём бутылок за 1 раз
 
     public BottleSong(int bottleTakenAtOnce) {
         // При создании проверяем допустимость количества бутылок за раз
